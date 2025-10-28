@@ -1,0 +1,64 @@
+<!--
+  Template do componente raiz da aplicação
+  Estrutura principal com menu lateral e área de conteúdo
+-->
+
+<!-- Toolbar com botão customizado -->
+<div class="mobile-toolbar">
+  <button class="mobile-menu-button" (click)="toggleMenu()">
+    <span class="po-icon po-icon-menu"></span>
+  </button>
+  <h1 class="mobile-toolbar-title">{{ title }}</h1>
+</div>
+
+<!-- Menu Customizado (overlay) - usado em mobile e desktop -->
+<div class="mobile-menu-container">
+  <!-- Overlay escuro -->
+  <div 
+    class="mobile-menu-overlay" 
+    *ngIf="!menuCollapsed"
+    (click)="closeMenu()">
+  </div>
+  
+  <!-- Menu lateral -->
+  <div class="mobile-menu" [class.open]="!menuCollapsed">
+    <div class="mobile-menu-header">
+      <h3 class="p-label text-white">Menu principal</h3>
+      <button class="close-button" (click)="closeMenu()">
+        <span class="po-icon po-icon-close"></span>
+      </button>
+    </div>
+    
+    <nav class="mobile-menu-nav">
+      <a 
+        *ngFor="let item of menuItems"
+        [routerLink]="item.link"
+        class="mobile-menu-item"
+        [class.has-subitems]="item.subItems && item.subItems.length > 0"
+        (click)="item.subItems ? toggleSubmenu(item) : onMenuItemClick()">
+        <span [class]="'po-icon ' + item.icon"></span>
+        <span class="item-label">{{ item.label }}</span>
+        <span *ngIf="item.subItems" class="po-icon po-icon-arrow-down expand-icon" 
+              [class.expanded]="isSubmenuOpen(item)"></span>
+      </a>
+      
+      <!-- Subitens -->
+      <div *ngFor="let item of menuItems">
+        <div *ngIf="item.subItems && isSubmenuOpen(item)" class="mobile-submenu">
+          <a 
+            *ngFor="let subitem of item.subItems"
+            [routerLink]="subitem.link"
+            class="mobile-submenu-item"
+            (click)="onMenuItemClick()">
+            <span [class]="'po-icon ' + subitem.icon"></span>
+            <span class="item-label">{{ subitem.label }}</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<div class="po-wrapper" [class.menu-collapsed]="menuCollapsed">
+  <router-outlet></router-outlet>
+</div>

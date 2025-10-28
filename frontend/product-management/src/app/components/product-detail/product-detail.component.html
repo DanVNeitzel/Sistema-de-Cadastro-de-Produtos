@@ -1,0 +1,143 @@
+<!--
+  Template do componente de detalhes do produto
+  Visualização completa com layout responsivo
+-->
+
+<po-page-detail [p-title]="product?.name || 'Carregando...'" [p-breadcrumb]="breadcrumb">
+
+  <!-- Loading overlay -->
+  <po-loading-overlay *ngIf="loading" [p-screen-lock]="true" p-text="Carregando produto...">
+  </po-loading-overlay>
+
+  <!-- Container principal -->
+  <div class="product-detail-container" *ngIf="product && !loading">
+
+    <!-- Seção principal com imagem e informações básicas -->
+    <po-container class="main-section">
+      <div class="po-row">
+
+        <!-- Área da imagem -->
+        <div class="po-md-4 image-section">
+          <div class="product-image-container">
+            <img *ngIf="hasValidImage()" [src]="product!.imageUrl" [alt]="product!.name" class="product-image"
+              (error)="onImageError($event)">
+
+            <!-- Placeholder quando não há imagem -->
+            <div *ngIf="!hasValidImage()" class="image-placeholder">
+              <po-avatar p-size="xl" [p-src]="''" p-icon="po-icon-image">
+              </po-avatar>
+              <p class="placeholder-text">Sem imagem</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Informações principais -->
+        <div class="po-md-8 info-section">
+          <div class="product-header">
+            <!-- Nome e status -->
+            <div class="product-title-row">
+              <h1 class="product-name">{{ product!.name }}</h1>
+              <po-tag [p-value]="getStatusTag().value" [p-type]="getStatusTag().type" [p-icon]="getStatusTag().icon">
+              </po-tag>
+            </div>
+
+            <!-- Preço destacado -->
+            <div class="price-section">
+              <span class="price-label">Preço:</span>
+              <span class="price-value">{{ formatPrice(product!.price) }}</span>
+            </div>
+
+            <!-- Categoria -->
+            <div class="category-section">
+              <po-tag [p-value]="getCategoryLabel(product!.category)" p-icon="po-icon-tag">
+              </po-tag>
+            </div>
+          </div>
+        </div>
+      </div>
+    </po-container>
+
+    <!-- Seção de descrição -->
+    <po-container class="description-section" *ngIf="product!.description">
+      <h3 class="section-title">
+        <po-icon p-icon="po-icon-document"></po-icon>
+        Descrição
+      </h3>
+      <p class="product-description">{{ product!.description }}</p>
+    </po-container>
+
+    <!-- Seção de informações técnicas -->
+    <po-container class="technical-section">
+      <h3 class="section-title">
+        <po-icon p-icon="po-icon-info"></po-icon>
+        Informações Técnicas
+      </h3>
+
+      <div class="po-row technical-info">
+        <!-- ID do produto -->
+        <div class="po-md-3">
+          <div class="info-item">
+            <label class="info-label">ID do Produto:</label>
+            <span class="info-value">#{{ product!.id }}</span>
+          </div>
+        </div>
+
+        <!-- Data de criação -->
+        <div class="po-md-4">
+          <div class="info-item">
+            <label class="info-label">Criado em:</label>
+            <span class="info-value">{{ formatDate(product!.createdAt) }}</span>
+          </div>
+        </div>
+
+        <!-- Última atualização -->
+        <div class="po-md-5">
+          <div class="info-item">
+            <label class="info-label">Última atualização:</label>
+            <span class="info-value">{{ formatDate(product!.updatedAt) }}</span>
+          </div>
+        </div>
+      </div>
+    </po-container>
+
+    <!-- Seção de ações rápidas -->
+    <po-container class="actions-section">
+      <h3 class="section-title">
+        <po-icon p-icon="po-icon-settings"></po-icon>
+        Ações Rápidas
+      </h3>
+
+      <div class="quick-actions">
+        
+        <po-button class="action-btn" p-label="Editar Produto" p-kind="primary" p-icon="po-icon-edit"
+          (p-click)="editProduct()">
+        </po-button>
+
+        <po-button class="action-btn" p-label="Excluir Produto" p-kind="danger" p-icon="po-icon-delete"
+          (p-click)="confirmDelete()">
+        </po-button>
+
+      </div>
+
+      <div class="back-button">
+        <po-button class="action-btn" p-label="Voltar" p-kind="tertiary" p-icon="po-icon-arrow-left"
+          (p-click)="goBack()">
+        </po-button>
+      </div>
+    </po-container>
+
+  </div>
+
+  <!-- Estado vazio/erro -->
+  <po-container *ngIf="!product && !loading" class="empty-state">
+    <div class="empty-content">
+      <po-avatar p-size="xl" p-icon="po-icon-warning" p-src="">
+      </po-avatar>
+      <h3>Produto não encontrado</h3>
+      <p>O produto solicitado não foi encontrado ou foi removido.</p>
+      <po-button p-label="Voltar para Lista" p-kind="primary" p-icon="po-icon-arrow-left" (p-click)="goBack()">
+      </po-button>
+    </div>
+  </po-container>
+
+</po-page-detail>

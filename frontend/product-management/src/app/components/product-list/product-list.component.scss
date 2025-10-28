@@ -1,0 +1,136 @@
+/**
+ * Estilos do componente de listagem de produtos
+ * Layout responsivo e customizações visuais
+ */
+
+.filters-form {
+  background-color: #f8f9fa;
+  padding: 24px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  border: 1px solid #e9ecef;
+
+  .po-row {
+    margin-bottom: 16px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.filters-actions {
+  padding-top: 16px;
+  border-top: 1px solid #e9ecef;
+  margin-top: 16px;
+}
+
+.product-name-link {
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+  
+  &:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+  
+  &:active {
+    color: #004085;
+  }
+}
+
+.price-value {
+  font-weight: 600;
+  color: #28a745;
+}
+
+.summary-info {
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  margin-top: 16px;
+  text-align: center;
+  
+  p {
+    margin: 0;
+    color: #6c757d;
+  }
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+  .filters-form {
+    padding: 16px;
+    
+    .po-md-2, .po-md-4 {
+      width: 100% !important;
+      margin-bottom: 16px;
+    }
+  }
+  
+  .summary-info {
+    padding: 12px;
+    
+    p {
+      font-size: 12px;
+    }
+  }
+}
+
+/* Customizações do PO-UI */
+::ng-deep {
+  .po-table {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .po-table-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    
+    .po-table-header-ellipsis {
+      color: #000000 !important;
+      font-weight: 600 !important;
+    }
+    
+    .po-table-header-actions {
+      .po-icon {
+        color: white !important;
+      }
+    }
+    
+    // Ícones de ordenação
+    .po-table-header-icon {
+      color: white !important;
+    }
+  }
+  
+  .po-table-row:hover {
+    background-color: #f8f9fa;
+    transition: background-color 0.2s ease;
+  }
+  
+  .po-page-list {
+    margin-top: 24px;
+    
+    .po-page-list-info {
+      color: #6c757d;
+    }
+  }
+  
+  .po-loading-overlay {
+    border-radius: 8px;
+  }
+  
+  .po-tag {
+    font-size: 11px;
+    font-weight: 600;
+  }
+  
+  // Customiza o header do gerenciador de colunas
+  .po-page-slide-header {
+    margin-top: 35px !important;
+  }
+}

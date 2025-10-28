@@ -1,0 +1,59 @@
+<!--
+  Template do componente 404 - Página não encontrada
+  Interface amigável e informativa
+-->
+
+<po-page-default p-title="Página não encontrada">
+
+  <po-container class="not-found-container">
+    <div class="not-found-content">
+
+      <!-- Ícone visual -->
+      <div class="icon-section">
+        <po-avatar p-size="xl" p-icon="po-icon-warning" p-src="">
+        </po-avatar>
+      </div>
+
+      <!-- Código do erro -->
+      <div class="error-code">
+        <h1>404</h1>
+      </div>
+
+      <!-- Título e descrição -->
+      <div class="error-info">
+        <h2>Oops! Página não encontrada</h2>
+        <p class="error-description">
+          A página que você está procurando não existe ou foi movida para outro local.
+          <br>
+          Verifique o endereço digitado ou navegue de volta para uma página válida.
+        </p>
+      </div>
+
+      <!-- Ações disponíveis -->
+      <div class="error-actions">
+        <po-button class="action-button primary" p-label="Ir para Produtos" p-kind="primary" p-icon="po-icon-home"
+          (p-click)="goHome()">
+        </po-button>
+
+        <po-button class="action-button" p-label="Página Anterior" p-kind="secondary" p-icon="po-icon-arrow-left"
+          (p-click)="goBack()">
+        </po-button>
+      </div>
+
+      <!-- Informações adicionais -->
+      <div class="help-info">
+        <p class="help-text">
+          <strong>Precisa de ajuda?</strong>
+          <br>
+          • Verifique se o endereço está correto
+          <br>
+          • Tente usar o menu de navegação
+          <br>
+          • Entre em contato com o suporte se o problema persistir
+        </p>
+      </div>
+
+    </div>
+  </po-container>
+
+</po-page-default>

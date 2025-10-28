@@ -1,0 +1,217 @@
+/**
+ * Estilos do componente 404
+ * Design clean e amigável para erro de página
+ */
+
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 40px 20px;
+}
+
+.not-found-content {
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+}
+
+.icon-section {
+  margin-bottom: 24px;
+  
+  ::ng-deep .po-avatar {
+    background-color: #ffc107;
+    color: white;
+    border: 4px solid #fff3cd;
+    box-shadow: 0 4px 16px rgba(255, 193, 7, 0.3);
+  }
+}
+
+.error-code {
+  margin-bottom: 32px;
+  
+  h1 {
+    font-size: 8rem;
+    font-weight: 900;
+    margin: 0;
+    background: linear-gradient(135deg, #dc3545, #fd7e14);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 4px rgba(220, 53, 69, 0.2);
+    line-height: 1;
+  }
+}
+
+.error-info {
+  margin-bottom: 40px;
+  
+  h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #495057;
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+  }
+  
+  .error-description {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #6c757d;
+    margin: 0;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.error-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+  
+  .action-button {
+    min-width: 180px;
+    padding: 12px 24px;
+    font-weight: 600;
+    
+    &.primary {
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    }
+  }
+}
+
+.help-info {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 24px;
+  margin-top: 32px;
+  
+  .help-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #495057;
+    margin: 0;
+    
+    strong {
+      color: #212529;
+      font-size: 1.1rem;
+    }
+  }
+}
+
+/* Animações sutis */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.not-found-content > * {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.icon-section {
+  animation-delay: 0.1s;
+}
+
+.error-code {
+  animation-delay: 0.2s;
+}
+
+.error-info {
+  animation-delay: 0.3s;
+}
+
+.error-actions {
+  animation-delay: 0.4s;
+}
+
+.help-info {
+  animation-delay: 0.5s;
+}
+
+/* Responsividade para tablets */
+@media (max-width: 992px) {
+  .error-code h1 {
+    font-size: 6rem;
+  }
+  
+  .error-info h2 {
+    font-size: 2rem;
+  }
+  
+  .error-info .error-description {
+    font-size: 1.1rem;
+  }
+  
+  .error-actions {
+    .action-button {
+      min-width: 160px;
+    }
+  }
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+  .not-found-container {
+    padding: 20px 16px;
+    min-height: 50vh;
+  }
+  
+  .error-code h1 {
+    font-size: 4.5rem;
+  }
+  
+  .error-info h2 {
+    font-size: 1.8rem;
+  }
+  
+  .error-info .error-description {
+    font-size: 1rem;
+  }
+  
+  .error-actions {
+    flex-direction: column;
+    align-items: center;
+    
+    .action-button {
+      width: 100%;
+      max-width: 280px;
+      min-width: auto;
+    }
+  }
+  
+  .help-info {
+    padding: 20px;
+    
+    .help-text {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+/* Customizações do PO-UI */
+::ng-deep {
+  .po-button {
+    transition: all 0.3s ease;
+    
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15) !important;
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}

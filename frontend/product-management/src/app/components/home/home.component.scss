@@ -1,0 +1,284 @@
+/**
+ * Estilos do componente home
+ * Layout responsivo com cards interativos
+ */
+
+.welcome-section {
+  text-align: center;
+  padding: 32px 16px;
+  margin-bottom: 24px;
+
+  .welcome-title {
+    font-size: 32px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    po-icon {
+      font-size: 36px;
+      color: #007bff;
+    }
+  }
+
+  .welcome-text {
+    font-size: 16px;
+    color: #6c757d;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin: 32px 0;
+}
+
+.card-item {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 2px solid #e9ecef;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 240px;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .card-header {
+    margin-bottom: 16px;
+
+    .card-icon {
+      font-size: 48px;
+      opacity: 0.9;
+    }
+  }
+
+  .card-body {
+    flex: 1;
+    margin-bottom: 16px;
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #2c3e50;
+    }
+
+    .card-description {
+      font-size: 14px;
+      color: #6c757d;
+      line-height: 1.5;
+    }
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: flex-end;
+
+    .card-link {
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.3s ease;
+    }
+  }
+
+  // Cores por tipo
+  &.card-primary {
+    border-color: #007bff;
+
+    .card-icon {
+      color: #007bff;
+    }
+
+    .card-link {
+      color: #007bff;
+    }
+
+    &:hover {
+      border-color: #0056b3;
+      background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
+
+      .card-link {
+        gap: 10px;
+      }
+    }
+  }
+
+  &.card-success {
+    border-color: #28a745;
+
+    .card-icon {
+      color: #28a745;
+    }
+
+    .card-link {
+      color: #28a745;
+    }
+
+    &:hover {
+      border-color: #1e7e34;
+      background: linear-gradient(135deg, #ffffff 0%, #f0fff4 100%);
+
+      .card-link {
+        gap: 10px;
+      }
+    }
+  }
+
+  &.card-info {
+    border-color: #17a2b8;
+
+    .card-icon {
+      color: #17a2b8;
+    }
+
+    .card-link {
+      color: #17a2b8;
+    }
+
+    &:hover {
+      border-color: #117a8b;
+      background: linear-gradient(135deg, #ffffff 0%, #f0fcff 100%);
+
+      .card-link {
+        gap: 10px;
+      }
+    }
+  }
+
+  &.card-warning {
+    border-color: #ffc107;
+
+    .card-icon {
+      color: #ffc107;
+    }
+
+    .card-link {
+      color: #e0a800;
+    }
+
+    &:hover {
+      border-color: #e0a800;
+      background: linear-gradient(135deg, #ffffff 0%, #fffdf0 100%);
+
+      .card-link {
+        gap: 10px;
+      }
+    }
+  }
+}
+
+.info-section {
+  margin-top: 48px;
+  padding: 32px 0;
+  background: #f8f9fa;
+  border-radius: 12px;
+
+  h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    po-icon {
+      font-size: 28px;
+      color: #007bff;
+    }
+  }
+
+  .info-item {
+    text-align: center;
+    padding: 16px;
+
+    .info-icon-success {
+      font-size: 32px;
+      color: #28a745;
+      margin-bottom: 12px;
+    }
+
+    strong {
+      display: block;
+      font-size: 16px;
+      color: #2c3e50;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #6c757d;
+      margin: 0;
+    }
+  }
+}
+
+/* Responsividade para tablets */
+@media (max-width: 992px) {
+  .welcome-section {
+    padding: 24px 12px;
+
+    .welcome-title {
+      font-size: 28px;
+    }
+
+    .welcome-text {
+      font-size: 15px;
+    }
+  }
+
+  .cards-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+}
+
+/* Responsividade para mobile */
+@media (max-width: 768px) {
+  .welcome-section {
+    padding: 20px 8px;
+
+    .welcome-title {
+      font-size: 24px;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .welcome-text {
+      font-size: 14px;
+    }
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .card-item {
+    min-height: auto;
+  }
+
+  .info-section {
+    padding: 24px 16px;
+
+    h3 {
+      font-size: 20px;
+    }
+  }
+}

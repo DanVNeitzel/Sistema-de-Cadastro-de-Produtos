@@ -1,0 +1,227 @@
+/**
+ * Estilos do componente de formulário de produtos
+ * Layout responsivo e UX otimizada
+ */
+
+.form-section {
+  margin-bottom: 32px;
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+
+  &:last-child {
+    margin-bottom: 24px;
+  }
+}
+
+.section-title {
+  margin: 0 0 24px 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #007bff;
+  color: #495057;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.form-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  padding: 24px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  margin-top: 24px;
+
+  .action-button {
+    min-width: 140px;
+  }
+}
+
+.image-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px dashed #dee2e6;
+
+  .po-field-label {
+    margin-bottom: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6c757d;
+  }
+}
+
+.product-image-preview {
+  max-width: 100%;
+  max-height: 150px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: none; // Inicialmente oculta, aparece apenas quando carrega com sucesso
+}
+
+.debug-info {
+  background-color: #f8f9fa;
+  padding: 16px;
+  border-radius: 4px;
+  border-left: 4px solid #17a2b8;
+  
+  pre {
+    background-color: #e9ecef;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    margin: 8px 0 0 0;
+    overflow-x: auto;
+  }
+}
+
+/* Mensagens de erro personalizadas */
+.error-message {
+  display: block;
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  font-weight: 500;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividade para tablets */
+@media (max-width: 992px) {
+  .form-section {
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  
+  .section-title {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .form-actions {
+    padding: 20px;
+    
+    .action-button {
+      min-width: 120px;
+    }
+  }
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+  .form-section {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .section-title {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+    padding: 16px;
+    gap: 12px;
+    
+    .action-button {
+      width: 100%;
+      min-width: auto;
+    }
+  }
+  
+  .image-preview {
+    padding: 12px;
+  }
+  
+  .product-image-preview {
+    max-height: 120px;
+  }
+}
+
+/* Customizações específicas do PO-UI */
+::ng-deep {
+  // Estilos para campos obrigatórios com erro
+  .po-field-container.ng-invalid.ng-touched,
+  .po-field-container-bottom.ng-invalid.ng-touched {
+    .po-input,
+    .po-select-button,
+    .po-number-container .po-input,
+    .po-textarea-container textarea,
+    .po-url-container .po-input {
+      border-color: #dc3545 !important;
+      border-width: 2px !important;
+      
+      &:focus,
+      &:focus-within {
+        border-color: #dc3545 !important;
+        box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+      }
+    }
+  }
+  
+  // Estilos para campos válidos após serem tocados
+  .po-field-container.ng-valid.ng-touched.ng-dirty,
+  .po-field-container-bottom.ng-valid.ng-touched.ng-dirty {
+    .po-input,
+    .po-select-button,
+    .po-number-container .po-input,
+    .po-textarea-container textarea,
+    .po-url-container .po-input {
+      border-color: #28a745 !important;
+      
+      &:focus,
+      &:focus-within {
+        border-color: #28a745 !important;
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25) !important;
+      }
+    }
+  }
+  
+  // Personalização do switch
+  .po-switch {
+    .po-switch-container {
+      margin-top: 8px;
+    }
+  }
+  
+  // Personalização da textarea
+  .po-textarea {
+    .po-textarea-container {
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+    }
+  }
+  
+  // Estilos para campos de número
+  .po-number {
+    .po-input-icon {
+      color: #28a745;
+    }
+  }
+  
+  // Loading overlay customizado
+  .po-loading-overlay {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+  }
+}

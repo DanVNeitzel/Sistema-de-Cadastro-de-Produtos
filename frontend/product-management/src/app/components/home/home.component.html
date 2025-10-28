@@ -1,0 +1,51 @@
+<!--
+  Template do componente home
+  Página inicial com cards de acesso rápido
+-->
+
+<po-page-default>
+
+  <!-- Container principal -->
+  <po-container>
+
+    <!-- Seção de boas-vindas -->
+    <div class="welcome-section">
+      <h2 class="welcome-title">
+        <po-icon p-icon="po-icon-home"></po-icon>
+        Bem-vindo ao Sistema de Gerenciamento de Produtos!
+      </h2>
+      <p class="welcome-text">
+        Gerencie seu catálogo de produtos de forma rápida e eficiente.<br>
+        Escolha uma das opções abaixo para começar.
+      </p>
+    </div>
+
+    <po-divider></po-divider>
+
+    <!-- Grid de cards -->
+    <div class="cards-grid">
+      <div *ngFor="let card of cards" class="card-item" [class.card-primary]="card.color === 'primary'"
+        [class.card-success]="card.color === 'success'" [class.card-info]="card.color === 'info'"
+        [class.card-warning]="card.color === 'warning'" (click)="navigateTo(card.route)">
+
+        <div class="card-header">
+          <po-icon [p-icon]="card.icon" class="card-icon"></po-icon>
+        </div>
+
+        <div class="card-body">
+          <h3 class="card-title">{{ card.title }}</h3>
+          <p class="card-description">{{ card.description }}</p>
+        </div>
+
+        <div class="card-footer">
+          <span class="card-link">
+            Acessar
+            <po-icon p-icon="po-icon-arrow-right"></po-icon>
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </po-container>
+
+</po-page-default>

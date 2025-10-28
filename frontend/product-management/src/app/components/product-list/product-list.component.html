@@ -1,0 +1,65 @@
+<!--
+  Template do componente de listagem de produtos
+  Interface responsiva com filtros, tabela e paginação
+-->
+
+<!-- Loading overlay de tela toda -->
+<po-loading-overlay *ngIf="loading" [p-screen-lock]="true" p-text="Carregando produtos...">
+</po-loading-overlay>
+
+<po-page-list p-title="Gerenciamento de Produtos" [p-actions]="pageActions">
+
+  <!-- Container de filtros -->
+  <po-container [p-no-border]="true">
+    <form [formGroup]="filterForm" class="filters-form">
+      <div class="po-row">
+        <!-- Campo de busca -->
+        <po-input class="po-md-4" name="search" formControlName="search" p-label="Buscar"
+          p-placeholder="Nome ou descrição do produto" p-icon="po-icon-search">
+        </po-input>
+
+        <!-- Filtro por categoria -->
+        <po-select class="po-md-2" name="category" formControlName="category" p-label="Categoria"
+          [p-options]="categoryOptions" p-placeholder="Selecione">
+        </po-select>
+
+        <!-- Preço mínimo -->
+        <po-number class="po-md-2" name="minPrice" formControlName="minPrice" p-label="Preço Min."
+          p-placeholder="R$ 0,00" p-thousands-separator="." p-decimal-separator=",">
+        </po-number>
+
+        <!-- Preço máximo -->
+        <po-number class="po-md-2" name="maxPrice" formControlName="maxPrice" p-label="Preço Máx."
+          p-placeholder="R$ 9999,99" p-thousands-separator="." p-decimal-separator=",">
+        </po-number>
+
+        <!-- Status ativo/inativo -->
+        <po-select class="po-md-2" name="active" formControlName="active" p-label="Status" 
+          [p-options]="statusOptions" 
+          p-placeholder="Selecione">
+        </po-select>
+      </div>
+
+      <!-- Ações dos filtros -->
+      <div class="po-row filters-actions">
+        <po-button class="po-md-2" p-label="Limpar Filtros" p-kind="tertiary" p-icon="po-icon-close"
+          (p-click)="clearFilters()">
+        </po-button>
+      </div>
+    </form>
+  </po-container>
+
+  <!-- Tabela de produtos -->
+  <po-table [p-columns]="columns" [p-items]="products" [p-actions]="tableActions" p-sort="true" p-striped="true"
+    p-size="medium" [p-hide-batch-actions]="true" p-empty-message="Nenhum produto encontrado com os filtros aplicados">
+  </po-table>
+
+  <!-- Informações adicionais -->
+  <div class="summary-info" *ngIf="!loading && products.length > 0">
+    <p class="po-font-text-small-bold">
+      Total de produtos: {{ totalItems }} |
+      Exibindo {{ products.length }} produto(s) da página {{ currentPage }} de {{ getTotalPages() }}
+    </p>
+  </div>
+
+</po-page-list>

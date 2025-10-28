@@ -1,0 +1,145 @@
+<!--
+  Template do componente de formulário de produtos
+  Formulário responsivo com validações e feedback visual
+-->
+
+<po-page-edit [p-title]="pageTitle" [p-subtitle]="pageSubtitle" [p-breadcrumb]="breadcrumb">
+
+  <!-- Loading overlay -->
+  <po-loading-overlay *ngIf="loading" [p-screen-lock]="true" p-text="Processando...">
+  </po-loading-overlay>
+
+  <!-- Formulário principal -->
+  <form [formGroup]="productForm" (ngSubmit)="saveProduct()">
+
+    <!-- Container do formulário -->
+    <po-container>
+
+      <!-- Seção: Informações Básicas -->
+      <div class="form-section">
+        <h3 class="section-title">Informações Básicas</h3>
+
+        <div class="po-row">
+          <!-- Nome do produto -->
+          <div class="po-md-6 field-wrapper" [class.field-error]="getFieldError('name')"
+            [class.field-valid]="!getFieldError('name') && productForm.get('name')?.touched && productForm.get('name')?.valid">
+            <po-input name="name" formControlName="name" p-label="Nome do Produto *"
+              p-placeholder="Digite o nome do produto" p-help="Nome que identificará o produto no sistema"
+              [p-maxlength]="100">
+            </po-input>
+            <small class="error-message" *ngIf="getFieldError('name')">
+              {{ getFieldError('name') }}
+            </small>
+          </div>
+
+          <!-- Categoria -->
+          <div class="po-md-6 field-wrapper" [class.field-error]="getFieldError('category')"
+            [class.field-valid]="!getFieldError('category') && productForm.get('category')?.touched && productForm.get('category')?.valid">
+            <po-select name="category" formControlName="category" p-label="Categoria *" [p-options]="categoryOptions"
+              p-placeholder="Selecione a categoria" p-help="Categoria do produto para organização">
+            </po-select>
+            <small class="error-message" *ngIf="getFieldError('category')">
+              {{ getFieldError('category') }}
+            </small>
+          </div>
+        </div>
+
+        <div class="po-row">
+          <!-- Preço -->
+          <div class="po-md-4 field-wrapper" [class.field-error]="getFieldError('price')"
+            [class.field-valid]="!getFieldError('price') && productForm.get('price')?.touched && productForm.get('price')?.valid">
+            <po-number name="price" formControlName="price" p-label="Preço *" p-placeholder="R$ 0,00"
+              p-help="Preço de venda do produto em reais" 
+              [p-min]="0.01" 
+              [p-max]="999999.99" 
+              p-icon="po-icon-finance"
+              p-thousands-separator="."
+              p-decimal-separator=","
+              p-currency="BRL"
+              (p-blur)="formatPrice()">
+            </po-number>
+            <small class="error-message" *ngIf="getFieldError('price')">
+              {{ getFieldError('price') }}
+            </small>
+          </div>
+
+          <!-- Status ativo/inativo -->
+          <po-switch class="po-md-4" name="active" formControlName="active" p-label="Produto Ativo"
+            p-help="Produto disponível para venda" p-label-on="Ativo" p-label-off="Inativo">
+          </po-switch>
+        </div>
+      </div>
+
+      <!-- Seção: Descrição e Mídia -->
+      <div class="form-section">
+        <h3 class="section-title">Descrição e Mídia</h3>
+
+        <div class="po-row">
+          <!-- Descrição -->
+          <div class="po-md-12 field-wrapper" [class.field-error]="getFieldError('description')"
+            [class.field-valid]="!getFieldError('description') && productForm.get('description')?.touched && productForm.get('description')?.valid">
+            <po-textarea name="description" formControlName="description" p-label="Descrição"
+              p-placeholder="Descrição detalhada do produto (opcional)"
+              p-help="Descrição que será exibida na página do produto" [p-maxlength]="500" [p-rows]="4">
+            </po-textarea>
+            <small class="error-message" *ngIf="getFieldError('description')">
+              {{ getFieldError('description') }}
+            </small>
+          </div>
+        </div>
+
+        <div class="po-row">
+          <!-- URL da imagem -->
+          <div class="po-md-8 field-wrapper" [class.field-error]="getFieldError('imageUrl')"
+            [class.field-valid]="!getFieldError('imageUrl') && productForm.get('imageUrl')?.touched && productForm.get('imageUrl')?.valid">
+            <po-url name="imageUrl" formControlName="imageUrl" p-label="URL da Imagem"
+              p-placeholder="https://exemplo.com/imagem.jpg"
+              p-help="URL de uma imagem do produto (jpg, jpeg, png, gif, webp)">
+            </po-url>
+            <small class="error-message" *ngIf="getFieldError('imageUrl')">
+              {{ getFieldError('imageUrl') }}
+            </small>
+          </div>
+
+          <!-- Preview da imagem -->
+          <div class="po-md-4" *ngIf="productForm.get('imageUrl')?.value">
+            <div class="image-preview">
+              <label class="po-field-label">Preview da Imagem:</label>
+              <img [src]="productForm.get('imageUrl')?.value" alt="Preview do produto" class="product-image-preview"
+                (error)="onImageError($event)" (load)="onImageLoad($event)">
+              <p class="po-font-text-small" *ngIf="!productForm.get('imageUrl')?.value">
+                Nenhuma imagem selecionada
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resumo do formulário (modo debug - remover em produção) -->
+      <div class="form-section" *ngIf="false">
+        <h3 class="section-title">Debug - Resumo do Formulário</h3>
+        <div class="debug-info">
+          <p><strong>Status:</strong> {{ productForm.status }}</p>
+          <p><strong>Válido:</strong> {{ productForm.valid }}</p>
+          <p><strong>Modificado:</strong> {{ productForm.dirty }}</p>
+          <p><strong>Tocado:</strong> {{ productForm.touched }}</p>
+          <pre>{{ productForm.value | json }}</pre>
+        </div>
+      </div>
+
+    </po-container>
+
+    <!-- Botões de ação (mobile-friendly) -->
+    <div class="form-actions">
+      <po-button class="action-button" p-label="Salvar Produto" p-kind="primary" p-icon="po-icon-save"
+        [p-loading]="loading" [p-disabled]="loading" (p-click)="saveProduct()" type="submit">
+      </po-button>
+
+      <po-button class="action-button" p-label="Cancelar" p-kind="tertiary" p-icon="po-icon-close"
+        [p-disabled]="loading" (p-click)="cancel()">
+      </po-button>
+    </div>
+
+  </form>
+
+</po-page-edit>

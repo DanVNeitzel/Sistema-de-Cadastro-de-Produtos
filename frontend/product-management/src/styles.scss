@@ -1,0 +1,49 @@
+/* Estilos globais da aplicação */
+
+/* Reset básico e configurações globais */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #f5f5f5;
+}
+
+/* Customizações do tema para melhor UX */
+.app-container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+/* Estilos para cards de produto */
+.product-card {
+  margin: 16px 0;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background-color: white;
+}
+
+/* Garantir que páginas do PO-UI não tenham conflitos */
+po-page-list,
+po-page-default,
+po-page-detail {
+  display: block;
+  width: 100%;
+}
+
+/* Responsividade básica */
+@media (max-width: 768px) {
+  .product-card {
+    margin: 8px 0;
+    padding: 16px;
+  }
+}

@@ -1,0 +1,297 @@
+/**
+ * Estilos do componente raiz
+ * Define layout principal e responsividade
+ */
+
+.po-wrapper {
+  /* Altura da toolbar */
+  padding: 60px 20px 0 20px;
+  min-height: calc(100vh - 48px);
+  background-color: #f5f5f5;
+  transition: margin-left 0.3s ease;
+}
+
+/* Customizações do PO-UI */
+::ng-deep {
+  .po-toolbar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1001 !important;
+
+    .po-toolbar-title {
+      color: #ffffff !important;
+      font-weight: 600 !important;
+    }
+
+    .po-toolbar-action .po-icon {
+      color: #ffffff !important;
+    }
+  }
+
+  .po-wrapper .po-page,
+  .po-wrapper .po-toolbar {
+    margin-left: var(--menu-width) 290px;
+    width: 100%;
+  }
+
+  .po-menu {
+    position: fixed !important;
+    top: 48px !important;
+    left: 0 !important;
+    height: calc(100vh - 48px) !important;
+    z-index: 1000 !important;
+    transition: width 0.3s ease, transform 0.3s ease !important;
+  }
+
+  // Garantir que o loading overlay cubra toda a tela
+  .po-loading-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 9999 !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+  }
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+  .po-wrapper {
+    margin-left: 0 !important;
+    padding: 16px !important;
+
+    &.menu-collapsed {
+      margin-left: 0 !important;
+    }
+  }
+}
+
+/* Toolbar Mobile Customizada */
+.mobile-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  z-index: 1001;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .mobile-menu-button {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    border-radius: 4px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-right: 12px;
+
+    &:hover,
+    &:active {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .po-icon {
+      font-size: 24px;
+      color: #ffffff;
+    }
+  }
+
+  .mobile-toolbar-title {
+    flex: 1;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* Menu Mobile Customizado */
+.mobile-menu-container {
+  .mobile-menu-overlay {
+    position: fixed;
+    top: 48px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 48px;
+    left: 0;
+    bottom: 0;
+    width: 280px;
+    max-width: 85vw;
+    background: #ffffff;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+
+    &.open {
+      transform: translateX(0);
+    }
+
+    .mobile-menu-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+      h3 {
+        color: #ffffff;
+        margin: 0;
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .close-button {
+        background: transparent;
+        border: none;
+        color: #ffffff;
+        cursor: pointer;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: background 0.2s;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.2);
+        }
+
+        .po-icon {
+          font-size: 20px;
+        }
+      }
+    }
+
+    .mobile-menu-nav {
+      padding: 8px 0;
+
+      .mobile-menu-item {
+        display: flex;
+        align-items: center;
+        padding: 14px 20px;
+        color: #333;
+        text-decoration: none;
+        border-left: 3px solid transparent;
+        transition: all 0.2s;
+        cursor: pointer;
+        position: relative;
+
+        &:hover {
+          background-color: #f5f5f5;
+          border-left-color: #667eea;
+        }
+
+        &:active {
+          background-color: #e8e8e8;
+        }
+
+        .po-icon:first-child {
+          font-size: 20px;
+          margin-right: 12px;
+          color: #667eea;
+        }
+
+        .item-label {
+          flex: 1;
+          font-size: 15px;
+          font-weight: 500;
+        }
+
+        .expand-icon {
+          font-size: 16px;
+          color: #999;
+          transition: transform 0.2s;
+
+          &.expanded {
+            transform: rotate(180deg);
+          }
+        }
+
+        &.has-subitems {
+          .item-label {
+            font-weight: 600;
+          }
+        }
+      }
+
+      .mobile-submenu {
+        background-color: #fafafa;
+        border-left: 3px solid #667eea;
+        margin-left: 20px;
+        animation: slideDown 0.2s ease;
+
+        .mobile-submenu-item {
+          display: flex;
+          align-items: center;
+          padding: 12px 20px 12px 32px;
+          color: #555;
+          text-decoration: none;
+          transition: all 0.2s;
+
+          &:hover {
+            background-color: #f0f0f0;
+          }
+
+          .po-icon {
+            font-size: 18px;
+            margin-right: 10px;
+            color: #764ba2;
+          }
+
+          .item-label {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
