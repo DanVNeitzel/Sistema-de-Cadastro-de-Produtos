@@ -52,10 +52,7 @@ Sistema full stack desenvolvido para gerenciamento de produtos com operações C
 │       ├── 📁 Models/
 │       ├── 📁 Data/
 │       └── 📁 Services/
-├── 📄 README.md
-├── 📄 DEVELOPMENT.md
-├── 📄 MOCK-SERVICE-BOAS-PRATICAS.md
-└── 📄 ERROS-CORRIGIDOS.md
+└── 📄 README.md
 ```
 
 ## 🚀 Tecnologias Utilizadas
